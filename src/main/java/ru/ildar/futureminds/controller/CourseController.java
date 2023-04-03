@@ -7,8 +7,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.ildar.futureminds.dto.course.DirectionMainDTO;
-import ru.ildar.futureminds.dto.user.JwtAuthentication;
+import ru.ildar.futureminds.dto.course.CourseMainDTO;
 import ru.ildar.futureminds.model.Course;
 import ru.ildar.futureminds.model.User;
 import ru.ildar.futureminds.service.AuthService;
@@ -26,7 +25,6 @@ import java.util.Optional;
 public class CourseController {
     private final CourseService courseService;
     private final ModelMapper modelMapper;
-
     private final AuthService authService;
     private final UserService userService;
 
@@ -34,11 +32,11 @@ public class CourseController {
     @GetMapping("/")
     public ResponseEntity<?> getCourse() {
         List<Course> courses = courseService.getAllCourses();
-        List<DirectionMainDTO> directionMainDTOS = new ArrayList<>();
+        List<CourseMainDTO> courseMainDTOS = new ArrayList<>();
         for (Course course : courses) {
-            directionMainDTOS.add(convertToDTO(course));
+            courseMainDTOS.add(convertToDTO(course));
         }
-        return new ResponseEntity<>(directionMainDTOS, HttpStatus.OK);
+        return new ResponseEntity<>(courseMainDTOS, HttpStatus.OK);
 
     }
 
@@ -54,9 +52,8 @@ public class CourseController {
     @PutMapping("/{courseId}/join")
     @Transactional
     public ResponseEntity<?> joinCourse(@PathVariable int courseId) {
-        final JwtAuthentication authInfo = authService.getAuthInfo();
-        String userEmail = (String) authInfo.getPrincipal();
-        Optional<User> user = userService.getByLogin(userEmail);
+        int user_id = authService.getAuthInfo().getId();
+        Optional<User> user = userService.findById(user_id);
         if (user.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -72,8 +69,8 @@ public class CourseController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    private DirectionMainDTO convertToDTO(Course course) {
-        return modelMapper.map(course, DirectionMainDTO.class);
+    private CourseMainDTO convertToDTO(Course course) {
+        return modelMapper.map(course, CourseMainDTO.class);
     }
 
 //    private AnimalTypeDTO convertToDTO(AnimalType animalType) {

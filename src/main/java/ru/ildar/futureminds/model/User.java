@@ -32,9 +32,9 @@ public class User {
 
     @Size(min = 2, max = 32)
     private String firstName;
-    @Size(min = 2, max = 32)
+    @Size(min = 0, max = 32)
     private String lastName;
-    @Size(min = 2, max = 32)
+    @Size(min = 0, max = 32)
     private String middleName;
     @Column(name =  "birthday")
     private Date birthday;
@@ -42,7 +42,7 @@ public class User {
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     @JsonManagedReference
-    private Set<UserCourse> userDirections;
+    private Set<UserCourse> courses;
 
     public User(String email, String password, String firstName, String lastName,
                 String middleName, Date birthday, Set<Role> roles) {
