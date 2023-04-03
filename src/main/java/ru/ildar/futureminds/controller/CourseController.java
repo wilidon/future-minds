@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.ildar.futureminds.dto.course.DirectionMainDTO;
 import ru.ildar.futureminds.dto.user.JwtAuthentication;
-import ru.ildar.futureminds.model.Direction;
+import ru.ildar.futureminds.model.Course;
 import ru.ildar.futureminds.model.User;
 import ru.ildar.futureminds.service.AuthService;
 import ru.ildar.futureminds.service.CourseService;
@@ -33,10 +33,10 @@ public class CourseController {
 
     @GetMapping("/")
     public ResponseEntity<?> getCourse() {
-        List<Direction> directions = courseService.getAllCourses();
+        List<Course> courses = courseService.getAllCourses();
         List<DirectionMainDTO> directionMainDTOS = new ArrayList<>();
-        for (Direction direction : directions) {
-            directionMainDTOS.add(convertToDTO(direction));
+        for (Course course : courses) {
+            directionMainDTOS.add(convertToDTO(course));
         }
         return new ResponseEntity<>(directionMainDTOS, HttpStatus.OK);
 
@@ -44,7 +44,7 @@ public class CourseController {
 
     @GetMapping("/{courseId}")
     public ResponseEntity<?> getCourseById(@PathVariable int courseId) {
-        Optional<Direction> course = courseService.getCourseById(courseId);
+        Optional<Course> course = courseService.getCourseById(courseId);
         if (course.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -60,7 +60,7 @@ public class CourseController {
         if (user.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        Optional<Direction> course = courseService.getCourseById(courseId);
+        Optional<Course> course = courseService.getCourseById(courseId);
         if (course.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -72,8 +72,8 @@ public class CourseController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    private DirectionMainDTO convertToDTO(Direction direction) {
-        return modelMapper.map(direction, DirectionMainDTO.class);
+    private DirectionMainDTO convertToDTO(Course course) {
+        return modelMapper.map(course, DirectionMainDTO.class);
     }
 
 //    private AnimalTypeDTO convertToDTO(AnimalType animalType) {

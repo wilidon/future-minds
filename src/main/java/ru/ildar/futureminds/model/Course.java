@@ -1,6 +1,5 @@
 package ru.ildar.futureminds.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
@@ -20,7 +19,7 @@ import java.util.Set;
 @Getter
 @Setter
 @ToString
-public class Direction {
+public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -40,15 +39,15 @@ public class Direction {
     @Column(name = "image_link")
     private String imageLink;
 
-    @OneToMany(mappedBy = "direction", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "course", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonManagedReference
     @Column(name = "tags")
     private Set<Tags> tags;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "direction")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "course")
     private List<Section> sections;
 
-    @OneToMany(mappedBy = "direction", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "course", fetch = FetchType.EAGER)
     @JsonIgnore
-    private Set<UserDirections> userDirections;
+    private Set<UserCourse> userDirections;
 }

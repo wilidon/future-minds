@@ -20,5 +20,5 @@ public class Tags {
 
     @ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
     @JsonBackReference
-    private Direction direction;
+    private Course course;
 }

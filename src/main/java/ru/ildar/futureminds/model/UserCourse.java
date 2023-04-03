@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @ToString
-public class UserDirections {
+public class UserCourse {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,16 +24,16 @@ public class UserDirections {
     User user;
 
     @ManyToOne
-    @JoinColumn(name = "direction_id")
+    @JoinColumn(name = "course_id")
     @JsonIgnore
-    Direction direction;
+    Course course;
 
     @JsonIgnore
     LocalDateTime registeredAt;
 
 
-    public UserDirections(User user, Direction direction) {
+    public UserCourse(User user, Course course) {
         this.user = user;
-        this.direction = direction;
+        this.course = course;
     }
 }

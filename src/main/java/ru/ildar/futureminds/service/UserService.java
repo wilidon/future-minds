@@ -1,17 +1,16 @@
 package ru.ildar.futureminds.service;
 
-import jakarta.transaction.Transactional;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 
-import ru.ildar.futureminds.model.Direction;
+import ru.ildar.futureminds.model.Course;
 import ru.ildar.futureminds.model.User;
-import ru.ildar.futureminds.model.UserDirections;
-import ru.ildar.futureminds.repository.UserDirectionsRepository;
+import ru.ildar.futureminds.model.UserCourse;
+import ru.ildar.futureminds.repository.UserCourseRepository;
 import ru.ildar.futureminds.repository.UserRepository;
 
 @Service
@@ -20,7 +19,7 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final CourseService courseService;
-    private final UserDirectionsRepository userDirectionsRepository;
+    private final UserCourseRepository userCourseRepository;
 
     public Optional<User> getById(@NonNull int id) {
         return userRepository.findById(id);
@@ -35,13 +34,18 @@ public class UserService {
     public boolean joinCourse(int user_id, int course_id) {
 
         User user = userRepository.findById(user_id).orElse(null);
-        Direction direction = courseService.getCourseById(course_id).orElse(null);
-        if (userDirectionsRepository.findUserDirectionsByDirectionAndUser(direction, user).isPresent()) {
+        Course course = courseService.getCourseById(course_id).orElse(null);
+        if (userCourseRepository.findUserCourseByCourseAndUser(course, user).isPresent()) {
             return false;
         }
-        userDirectionsRepository.save(new UserDirections(user, direction));
+        userCourseRepository.save(new UserCourse(user, course));
 
         return true;
+    }
+
+    public List<Course> findUserCourses(int user_id) {
+        Optional<User> user = userRepository.findById(user_id);
+        return null;
     }
 
 }

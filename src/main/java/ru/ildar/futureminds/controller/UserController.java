@@ -29,6 +29,16 @@ public class UserController {
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
+    @GetMapping("/course")
+    public ResponseEntity<?> getCurrentUse2r() {
+        String email = (String) authService.getAuthInfo().getPrincipal();
+        User user = userService.getByLogin(email).orElse(null);
+        if (user == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
 
     @GetMapping("/{user_id}")
     public ResponseEntity<?> getAllCourse(@PathVariable int user_id) {
@@ -37,5 +47,11 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
+
+    @GetMapping("/{user_id}/courses")
+    public ResponseEntity<?> getAllCourseByUser_id(@PathVariable int user_id) {
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

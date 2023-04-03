@@ -24,10 +24,10 @@ public class Section {
     @OneToMany(mappedBy = "section", fetch = FetchType.LAZY)
     private List<Module> modules;
 
-    @JoinColumn(name = "direction_id")
+    @JoinColumn(name = "course_id")
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnore
-    private Direction direction;
+    private Course course;
 
 
 
