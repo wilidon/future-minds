@@ -1,5 +1,8 @@
 package ru.ildar.futureminds.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -9,6 +12,8 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.util.List;
+import java.util.Set;
+
 
 @Entity
 @Table
@@ -37,4 +42,8 @@ public class Direction {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "direction")
     private List<Section> sections;
+
+    @OneToMany(mappedBy = "direction", fetch = FetchType.EAGER)
+    @JsonIgnore
+    private Set<UserDirections> userDirections;
 }

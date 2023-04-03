@@ -1,5 +1,7 @@
 package ru.ildar.futureminds.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -9,6 +11,7 @@ import lombok.Setter;
 import ru.ildar.futureminds.dto.Role;
 
 import java.sql.Date;
+import java.util.List;
 import java.util.Set;
 
 
@@ -38,6 +41,10 @@ public class User {
     @Column(name =  "birthday")
     private Date birthday;
     private Set<Role> roles;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    @JsonManagedReference
+    private Set<UserDirections> userDirections;
 
     public User(String email, String password, String firstName, String lastName,
                 String middleName, Date birthday, Set<Role> roles) {
