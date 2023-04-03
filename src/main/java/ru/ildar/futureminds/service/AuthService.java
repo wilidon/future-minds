@@ -7,12 +7,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.ildar.futureminds.dto.Role;
-import ru.ildar.futureminds.dto.user.JwtAuthentication;
-import ru.ildar.futureminds.dto.user.RegisterRequest;
-import ru.ildar.futureminds.dto.user.LoginRequest;
-import ru.ildar.futureminds.dto.user.TokenResponse;
-import ru.ildar.futureminds.model.User;
+import ru.ildar.futureminds.dto.user.*;
 import ru.ildar.futureminds.exception.AuthException;
+import ru.ildar.futureminds.model.User;
 
 import java.util.Collections;
 
@@ -33,18 +30,27 @@ public class AuthService {
                 registerRequest.getName(),
                 registerRequest.getSurname(),
                 registerRequest.getMiddleName(),
+                registerRequest.getDateBirth(),
                 Collections.singleton(Role.USER));
         final User user = userService.save(newUser);
         final String accessToken = jwtProvider.generateAccessToken(user);
         return new TokenResponse(accessToken);
     }
 
-    public TokenResponse login(@NonNull LoginRequest authRequest) {
+    public LoginResponse login(@NonNull LoginRequest authRequest) {
         final User user = userService.getByLogin(authRequest.getLogin())
                 .orElseThrow(() -> new AuthException("Пользователь не найден"));
         if (user.getPassword().equals(authRequest.getPassword())) {
             final String accessToken = jwtProvider.generateAccessToken(user);
-            return new TokenResponse(accessToken);
+            LoginResponse loginResponse = new LoginResponse(
+                    user.getEmail(),
+                    user.getFirstName(),
+                    user.getLastName(),
+                    user.getMiddleName(),
+                    user.getBirthday(),
+                    accessToken
+            );
+            return loginResponse;
         } else {
             throw new AuthException("Неправильный пароль");
         }

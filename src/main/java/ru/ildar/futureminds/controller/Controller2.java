@@ -3,6 +3,7 @@ package ru.ildar.futureminds.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,9 +11,10 @@ import ru.ildar.futureminds.dto.user.JwtAuthentication;
 import ru.ildar.futureminds.service.AuthService;
 
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("api")
 @RequiredArgsConstructor
-public class Controller {
+public class Controller2 {
 
     private final AuthService authService;
 

@@ -1,6 +1,7 @@
 package ru.ildar.futureminds.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,22 +24,29 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Size(min = 4, max = 32)
     private String email;
+    @Size(min = 4, max = 32)
     private String password;
+
+    @Size(min = 2, max = 32)
     private String firstName;
+    @Size(min = 2, max = 32)
     private String lastName;
+    @Size(min = 2, max = 32)
     private String middleName;
     @Column(name =  "birthday")
     private Date birthday;
     private Set<Role> roles;
 
     public User(String email, String password, String firstName, String lastName,
-                String middleName, Set<Role> roles) {
+                String middleName, Date birthday, Set<Role> roles) {
         this.email = email;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.middleName = middleName;
+        this.birthday = birthday;
         this.roles = roles;
     }
 }
