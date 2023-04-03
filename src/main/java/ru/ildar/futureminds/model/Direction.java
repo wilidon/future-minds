@@ -40,6 +40,11 @@ public class Direction {
     @Column(name = "image_link")
     private String imageLink;
 
+    @OneToMany(mappedBy = "direction", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonManagedReference
+    @Column(name = "tags")
+    private Set<Tags> tags;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "direction")
     private List<Section> sections;
 
