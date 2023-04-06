@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+import ru.ildar.futureminds.dto.user.ProfileRequest;
+import ru.ildar.futureminds.exception.UserNotFound;
 import ru.ildar.futureminds.model.Course;
 import ru.ildar.futureminds.model.User;
 import ru.ildar.futureminds.model.UserCourse;
@@ -21,10 +23,10 @@ public class UserService {
     private final CourseService courseService;
     private final UserCourseRepository userCourseRepository;
 
-    public Optional<User> getById(@NonNull int id) {
+    public Optional<User> findById(@NonNull int id) {
         return userRepository.findById(id);
     }
-    public Optional<User> getByLogin(@NonNull String email) {
+    public Optional<User> findByLogin(@NonNull String email) {
         return userRepository.findByEmail(email);
     }
     public User save(User user) {
@@ -46,6 +48,19 @@ public class UserService {
     public List<Course> findUserCourses(int user_id) {
         Optional<User> user = userRepository.findById(user_id);
         return null;
+    }
+
+
+    public boolean updateProfile(ProfileRequest profileRequest, int user_id) throws UserNotFound {
+        User user = findById(user_id).orElseThrow(() -> new UserNotFound());
+        user.setFirstName(profileRequest.getName());
+        user.setLastName(profileRequest.getLastName());
+        user.setMiddleName(profileRequest.getMiddleName());
+        user.setEmail(profileRequest.getEmail());
+        save(user);
+        // TODO add birthday
+        // user.setBirthday();
+        return true;
     }
 
 }

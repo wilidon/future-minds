@@ -24,7 +24,6 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody RegisterRequest authRequest) {
-        System.out.println("TEST ASDASDASDASDASD");
         final TokenResponse token = authService.register(authRequest);
         if (token == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

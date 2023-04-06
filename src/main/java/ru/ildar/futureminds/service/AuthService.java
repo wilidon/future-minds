@@ -22,7 +22,7 @@ public class AuthService {
 
     @Transactional
     public TokenResponse register(@NotNull RegisterRequest registerRequest) {
-        if (userService.getByLogin(registerRequest.getEmail()).isPresent()) {
+        if (userService.findByLogin(registerRequest.getEmail()).isPresent()) {
             return null;
         }
         final User newUser = new User(registerRequest.getEmail(),
@@ -38,7 +38,7 @@ public class AuthService {
     }
 
     public LoginResponse login(@NonNull LoginRequest authRequest) {
-        final User user = userService.getByLogin(authRequest.getLogin())
+        final User user = userService.findByLogin(authRequest.getLogin())
                 .orElseThrow(() -> new AuthException("Пользователь не найден"));
         if (user.getPassword().equals(authRequest.getPassword())) {
             final String accessToken = jwtProvider.generateAccessToken(user);

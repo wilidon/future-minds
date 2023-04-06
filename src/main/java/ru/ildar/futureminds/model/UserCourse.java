@@ -25,7 +25,6 @@ public class UserCourse {
 
     @ManyToOne
     @JoinColumn(name = "course_id")
-    @JsonIgnore
     Course course;
 
     @JsonIgnore

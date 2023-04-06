@@ -3,7 +3,7 @@ package ru.ildar.futureminds.dto.course;
 import lombok.Data;
 
 @Data
-public class DirectionMainDTO {
+public class CourseMainDTO {
     private int id;
     private String title;
     private String description;
