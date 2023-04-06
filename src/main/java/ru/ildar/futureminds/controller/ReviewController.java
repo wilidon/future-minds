@@ -24,4 +24,5 @@ public class ReviewController {
     public ResponseEntity<?> findReview() {
         return new ResponseEntity<>(reviewService.findReview(), HttpStatus.OK);
     }
+
 }
