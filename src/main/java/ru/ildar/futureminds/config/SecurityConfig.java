@@ -44,7 +44,7 @@ public class SecurityConfig {
                                     HttpServletResponse.SC_UNAUTHORIZED,
                                     ex.getMessage()
                             );
-                            System.out.println(ex.getMessage());
+
                         }
                 )
                 .and();
@@ -55,6 +55,7 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.GET, "/docs", "/v3/api-docs/**",
                         "/swagger-ui/**", "/swagger-ui.html", "/swagger-ui.html").permitAll()
                 .requestMatchers(HttpMethod.GET, "/api/news", "/api/news/**").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/review").permitAll()
                 // Our private endpoints
                 .anyRequest().authenticated();
 
@@ -66,36 +67,7 @@ public class SecurityConfig {
 
 
         return http.build();
-
-//                .addFilterBefore(corsFilter(), SessionManagementFilter.class)
-//                .httpBasic().disable()
-
-//                .authorizeHttpRequests(
-//                        authz -> {
-//                            try {
-//                                authz
-//                                        .requestMatchers("/api/auth/login",
-//                                                "/api/auth/register",
-//                                                "/docs",
-//                                                "/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html",
-//                                                "/api/course/",
-//                                                "/api/course").permitAll()
-//                                        .anyRequest().authenticated()
-//                                        .and()
-//                                        .addFilterAfter(jwtFilter, UsernamePasswordAuthenticationFilter.class);
-//                            } catch (Exception e) {
-//                                throw new RuntimeException(e);
-//                            }
-//                        }
-//                )
-//                .build();
-//    }
     }
-
-//    public CorsFilter corsFilter() {
-//
-//        return new ru.ildar.futureminds.filter.CorsFilter();
-//    }
 
     @Bean
     public ModelMapper modelMapper() {

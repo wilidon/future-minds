@@ -53,7 +53,7 @@ public class UserService {
 
     public boolean updateProfile(ProfileRequest profileRequest, int user_id) throws UserNotFound {
         User user = findById(user_id).orElseThrow(() -> new UserNotFound());
-        user.setFirstName(profileRequest.getName());
+        user.setFirstName(profileRequest.getFirstName());
         user.setLastName(profileRequest.getLastName());
         user.setMiddleName(profileRequest.getMiddleName());
         user.setEmail(profileRequest.getEmail());
