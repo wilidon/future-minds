@@ -6,5 +6,5 @@ import ru.ildar.futureminds.model.Course;
 import java.util.Optional;
 
 public interface CourseRepository extends JpaRepository<Course, Integer> {
-    Optional<Course> findById(int id);
+    Optional<Course> findByIdOrderByIdDesc(int id);
 }

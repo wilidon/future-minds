@@ -42,9 +42,11 @@ public class Course {
     @OneToMany(mappedBy = "course", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonManagedReference
     @Column(name = "tags")
+    @OrderBy("id ASC")
     private Set<Tags> tags;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "course")
+    @OrderBy("id ASC")
     private List<Section> sections;
 
     @OneToMany(mappedBy = "course", fetch = FetchType.EAGER)

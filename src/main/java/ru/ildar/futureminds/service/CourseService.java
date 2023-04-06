@@ -2,6 +2,8 @@ package ru.ildar.futureminds.service;
 
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import ru.ildar.futureminds.model.Course;
 import ru.ildar.futureminds.repository.CourseRepository;
@@ -21,7 +23,9 @@ public class CourseService {
     }
 
     public Optional<Course> getCourseById(int id) {
-        return courseRepository.findById(id);
+        Sort sort = Sort.by("tags.id").descending();
+        PageRequest pageRequest = PageRequest.of(0, 10, sort);
+        return courseRepository.findByIdOrderByIdDesc(id);
     }
 
 
