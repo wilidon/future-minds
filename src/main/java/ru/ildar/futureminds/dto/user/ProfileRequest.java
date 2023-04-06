@@ -8,9 +8,8 @@ import lombok.Setter;
 @Setter
 public class ProfileRequest {
     private String email;
-    private String name;
+    private String firstName;
     private String lastName;
     private String middleName;
     private String dateBirth;
-    private String accessToken;
 }
