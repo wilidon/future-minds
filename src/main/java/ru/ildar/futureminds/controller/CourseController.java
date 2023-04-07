@@ -55,6 +55,7 @@ public class CourseController {
     @PreAuthorize("hasAuthority('USER')")
     @Transactional
     public ResponseEntity<?> joinCourse(@PathVariable int courseId) {
+        System.out.println("!!!!Запрос пришел");
         int user_id = authService.getAuthInfo().getId();
         Optional<User> user = userService.findById(user_id);
         if (user.isEmpty()) {

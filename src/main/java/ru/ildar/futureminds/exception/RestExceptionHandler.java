@@ -20,4 +20,10 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<Object>(
                 "Access denied message here", new HttpHeaders(), HttpStatus.FORBIDDEN);
     }
+
+    @ExceptionHandler({AuthException.class})
+    protected ResponseEntity<Object> handlerNotFoundUser(AuthException ex, WebRequest request) {
+        return new ResponseEntity<Object>(
+                "User not found", new HttpHeaders(), HttpStatus.NOT_FOUND);
+    }
 }
