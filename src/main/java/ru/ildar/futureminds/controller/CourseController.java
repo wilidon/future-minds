@@ -51,7 +51,7 @@ public class CourseController {
         return ResponseEntity.ok(course.get());
     }
 
-    @PostMapping("/{courseId}/join")
+    @PutMapping("/{courseId}/join")
     @PreAuthorize("hasAuthority('USER')")
     @Transactional
     public ResponseEntity<?> joinCourse(@PathVariable int courseId) {
@@ -73,7 +73,7 @@ public class CourseController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PostMapping("/{moduleId}/passed")
+    @PutMapping("/{moduleId}/passed")
     public ResponseEntity<?> passModule(@PathVariable int moduleId) {
         int user_id = authService.getAuthInfo().getId();
         try {

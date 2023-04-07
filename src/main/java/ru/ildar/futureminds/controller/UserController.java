@@ -45,7 +45,7 @@ public class UserController {
         return new ResponseEntity<>(userProfileResponse, HttpStatus.OK);
     }
 
-    @PostMapping("/")
+    @PutMapping("/")
     public ResponseEntity<?> updateProfile(@RequestBody ProfileRequest profile) {
         int user_id = authService.getAuthInfo().getId();
         try {
@@ -82,7 +82,7 @@ public class UserController {
         return new ResponseEntity<>(courseMainDTOS, HttpStatus.OK);
     }
 
-    @GetMapping("/{user_id}/makeAdmin")
+    @PutMapping("/{user_id}/makeAdmin")
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> makeAdmin(@PathVariable int user_id) {
         User user = userService.findById(user_id).orElse(null);
