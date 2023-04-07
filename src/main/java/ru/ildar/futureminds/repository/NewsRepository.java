@@ -15,4 +15,6 @@ public interface NewsRepository extends JpaRepository<News, Integer> {
 
 
     Optional<News> findByLink(String link);
+
+    void deleteByLink(String link);
 }

@@ -2,11 +2,9 @@ package ru.ildar.futureminds.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import ru.ildar.futureminds.dto.Role;
 
 import java.sql.Date;
@@ -18,7 +16,6 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 public class User {
 
     @Id
@@ -29,15 +26,19 @@ public class User {
     private String email;
     @Size(min = 4, max = 32)
     private String password;
-
+    @Column(name = "first_name")
     @Size(min = 2, max = 32)
+    @NotNull
     private String firstName;
-    @Size(min = 0, max = 32)
+    @Column(name = "last_name")
+    @Size(max = 32)
     private String lastName;
-    @Size(min = 0, max = 32)
+    @Column(name = "middle_name")
+    @Size(max = 32)
     private String middleName;
     @Column(name =  "birthday")
     private Date birthday;
+    @Column(name = "roles")
     private Set<Role> roles;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
@@ -53,5 +54,18 @@ public class User {
         this.middleName = middleName;
         this.birthday = birthday;
         this.roles = roles;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", middleName='" + middleName + '\'' +
+                ", birthday=" + birthday +
+                ", roles=" + roles + '}';
     }
 }

@@ -2,6 +2,8 @@ package ru.ildar.futureminds.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -19,9 +21,12 @@ public class Section {
     private long id;
 
     @Column(name = "title")
+    @Size(min = 3, max = 32)
+    @NotNull
     private String title;
 
     @OneToMany(mappedBy = "section", fetch = FetchType.LAZY)
+    @OrderBy("id ASC")
     private List<Module> modules;
 
     @JoinColumn(name = "course_id")

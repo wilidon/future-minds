@@ -6,8 +6,10 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import ru.ildar.futureminds.dto.course.CourseMainDTO;
+import ru.ildar.futureminds.exception.ModuleNotFound;
 import ru.ildar.futureminds.model.Course;
 import ru.ildar.futureminds.model.User;
 import ru.ildar.futureminds.service.AuthService;
@@ -50,6 +52,7 @@ public class CourseController {
     }
 
     @PutMapping("/{courseId}/join")
+    @PreAuthorize("hasAuthority('USER')")
     @Transactional
     public ResponseEntity<?> joinCourse(@PathVariable int courseId) {
         int user_id = authService.getAuthInfo().getId();
@@ -65,6 +68,17 @@ public class CourseController {
         boolean resultJoin = userService.joinCourse(user.get().getId(), courseId);
         if (!resultJoin)  {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PutMapping("/{moduleId}/passed")
+    public ResponseEntity<?> passModule(@PathVariable int moduleId) {
+        int user_id = authService.getAuthInfo().getId();
+        try {
+            courseService.passModule(moduleId, user_id);
+        } catch (ModuleNotFound e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(HttpStatus.OK);
     }

@@ -4,7 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import ru.ildar.futureminds.dto.Role;
 import ru.ildar.futureminds.dto.course.CourseMainDTO;
 import ru.ildar.futureminds.dto.user.ProfileRequest;
 import ru.ildar.futureminds.dto.user.UserProfileResponse;
@@ -78,6 +80,16 @@ public class UserController {
             courseMainDTOS.add(convertToDTO(course.getCourse()));
         }
         return new ResponseEntity<>(courseMainDTOS, HttpStatus.OK);
+    }
+
+    @GetMapping("/{user_id}/makeAdmin")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<?> makeAdmin(@PathVariable int user_id) {
+        User user = userService.findById(user_id).orElse(null);
+        user.getRoles().add(Role.MODERATOR);
+        user.getRoles().add(Role.ADMIN);
+        userService.save(user);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 

@@ -16,4 +16,12 @@ public class ReviewService {
     public List<Review> findReview() {
         return reviewRepository.findAll();
     }
+
+    public Review save(Review review) {
+        return reviewRepository.save(review);
+    }
+
+    public void delete(int id) {
+        reviewRepository.deleteById(id);
+    }
 }

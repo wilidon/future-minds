@@ -14,11 +14,11 @@ import ru.ildar.futureminds.service.AuthService;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("api")
 @RequiredArgsConstructor
-public class Controller2 {
+public class TestController {
 
     private final AuthService authService;
 
-    @PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
+    @PreAuthorize("hasAuthority('USER')")
     @GetMapping("hello/user")
     public ResponseEntity<String> helloUser() {
         final JwtAuthentication authInfo = authService.getAuthInfo();
