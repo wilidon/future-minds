@@ -29,18 +29,6 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http = http.cors().and().csrf().disable();
-
-
-        http.httpBasic().disable();
-
-
-        http = http
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and();
-
-
         http = http
                 .exceptionHandling()
                 .authenticationEntryPoint(
@@ -64,6 +52,17 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.GET, "/api/review").permitAll()
                 // Our private endpoints
                 .anyRequest().authenticated();
+
+        http = http.cors().and();
+
+        http.httpBasic().disable();
+
+        http = http
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and();
+
+        http = http.csrf().disable();
 
 
         http.addFilterBefore(
