@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/api/user")
 @RequiredArgsConstructor
 public class UserController {
