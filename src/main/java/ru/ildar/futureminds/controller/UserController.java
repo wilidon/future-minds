@@ -22,7 +22,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/user")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequiredArgsConstructor
 public class UserController {
     private final ModelMapper modelMapper;
@@ -45,7 +44,7 @@ public class UserController {
         return new ResponseEntity<>(userProfileResponse, HttpStatus.OK);
     }
 
-    @PutMapping("/")
+    @PostMapping("/")
     public ResponseEntity<?> updateProfile(@RequestBody ProfileRequest profile) {
         int user_id = authService.getAuthInfo().getId();
         try {
