@@ -36,10 +36,10 @@ public class CourseService {
     public void passModule(int moduleId, int user_id) throws ModuleNotFound {
         // Хуже решения не видел еще
         // ну с другом стороны это гарантирует, что записи уникальные
-        Module module = moduleRepository.findById(moduleId).orElseThrow(() -> new ModuleNotFound());
-        module.getPassed_users().clear();
-        module.getPassed_users().add(userRepository.findById(user_id).get());
-        moduleRepository.save(module);
+//        Module module = moduleRepository.findById(moduleId).orElseThrow(() -> new ModuleNotFound());
+//        module.getPassed_users().clear();
+//        module.getPassed_users().add(userRepository.findById(user_id).get());
+//        moduleRepository.save(module);
     }
 
 

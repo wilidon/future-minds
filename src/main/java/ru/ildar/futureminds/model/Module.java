@@ -8,6 +8,9 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.JoinFormula;
+import org.hibernate.service.spi.InjectService;
+import org.springframework.beans.factory.annotation.Autowired;
+import ru.ildar.futureminds.repository.UserRepository;
 
 import java.util.List;
 
@@ -36,31 +39,4 @@ public class Module {
     @JsonIgnore
     private Section section;
 
-    @JoinTable(
-            name = "user_progress",
-            joinColumns = @JoinColumn(
-                    name = "module_id",
-                    referencedColumnName = "id"
-            ),
-            inverseJoinColumns = @JoinColumn(
-                    name = "user_id",
-                    referencedColumnName = "id"
-            )
-    )
-    @ManyToMany
-    @JsonIgnore
-    private List<User> passed_users;
-
-    @Transient
-    private boolean passed;
-
-    @PostLoad
-    private void postLoad() {
-        passed = true;
-        System.out.println(passed_users.toString());
-        System.out.println("SIZE ============ " + passed_users.size());
-        if (passed_users.isEmpty()) {
-            passed = false;
-        }
-    }
 }

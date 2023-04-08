@@ -33,6 +33,8 @@ public class JwtFilter extends GenericFilterBean {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
             throws IOException, ServletException {
         final String token = getTokenFromRequest((HttpServletRequest) servletRequest);
+        System.out.println("TOKEN" + token);
+        System.out.println("TOKEN" + ((HttpServletRequest) servletRequest).getRequestURL().toString());
         if (token != null && jwtProvider.validateAccessToken(token)) {
             final Claims claims = jwtProvider.getAccessClaims(token);
             final JwtAuthentication jwtInfoToken = JwtUtils.generate(claims);
@@ -42,10 +44,7 @@ public class JwtFilter extends GenericFilterBean {
 
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
-
-        System.out.println("getLocalAddr" + request.getLocalAddr());
-        System.out.println("getHeaderNames" + request.getHeader("Authorization"));
-
+        
         response.setHeader("Access-Control-Allow-Origin", "*");
         response.setHeader("Access-Control-Allow-Credentials", "true");
         response.setHeader("Access-Control-Allow-Methods", "GET, POST, PATCH, PUT, DELETE, OPTIONS");
