@@ -33,8 +33,6 @@ public class JwtFilter extends GenericFilterBean {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
             throws IOException, ServletException {
         final String token = getTokenFromRequest((HttpServletRequest) servletRequest);
-        System.out.println("TOKEN" + token);
-        System.out.println("TOKEN" + ((HttpServletRequest) servletRequest).getRequestURL().toString());
         if (token != null && jwtProvider.validateAccessToken(token)) {
             final Claims claims = jwtProvider.getAccessClaims(token);
             final JwtAuthentication jwtInfoToken = JwtUtils.generate(claims);

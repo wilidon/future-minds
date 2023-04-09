@@ -25,7 +25,7 @@ public class CourseService {
 
 
     public List<Course> getAllCourses() {
-        return courseRepository.findAll();
+        return courseRepository.findAllByOrderByIdAsc();
     }
 
     public Optional<Course> getCourseById(int id) {

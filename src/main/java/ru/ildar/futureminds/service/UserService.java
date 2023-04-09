@@ -12,6 +12,7 @@ import ru.ildar.futureminds.exception.UserNotFound;
 import ru.ildar.futureminds.model.Course;
 import ru.ildar.futureminds.model.User;
 import ru.ildar.futureminds.model.UserCourse;
+import ru.ildar.futureminds.repository.CourseRepository;
 import ru.ildar.futureminds.repository.UserCourseRepository;
 import ru.ildar.futureminds.repository.UserRepository;
 
@@ -22,6 +23,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final CourseService courseService;
     private final UserCourseRepository userCourseRepository;
+    private final CourseRepository courseRepository;
 
     public Optional<User> findById(@NonNull int id) {
         return userRepository.findById(id);
@@ -34,12 +36,13 @@ public class UserService {
     }
 
     public boolean joinCourse(int user_id, int course_id) {
-
         User user = userRepository.findById(user_id).orElse(null);
         Course course = courseService.getCourseById(course_id).orElse(null);
         if (userCourseRepository.findUserCourseByCourseAndUser(course, user).isPresent()) {
             return false;
         }
+        course.setParticipants(course.getParticipants() + 1);
+        courseRepository.save(course);
         userCourseRepository.save(new UserCourse(user, course));
 
         return true;

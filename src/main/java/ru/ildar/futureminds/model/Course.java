@@ -38,6 +38,8 @@ public class Course {
     private Integer participants;
     @Column(name = "image_link")
     private String imageLink;
+    @Column(name = "locked")
+    private boolean locked;
 
     @OneToMany(mappedBy = "course", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonManagedReference

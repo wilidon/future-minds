@@ -10,4 +10,5 @@ public class CourseMainDTO {
     private int duration;
     private int participants;
     private String imageLink;
+    private Boolean locked;
 }
