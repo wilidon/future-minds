@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-import ru.ildar.futureminds.dto.user.ProfileRequest;
+import ru.ildar.futureminds.domain.dto.user.ProfileRequest;
 import ru.ildar.futureminds.exception.UserNotFound;
 import ru.ildar.futureminds.model.Course;
 import ru.ildar.futureminds.model.User;

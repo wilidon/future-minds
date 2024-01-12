@@ -6,10 +6,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import ru.ildar.futureminds.dto.Role;
-import ru.ildar.futureminds.dto.course.CourseMainDTO;
-import ru.ildar.futureminds.dto.user.ProfileRequest;
-import ru.ildar.futureminds.dto.user.UserProfileResponse;
+import ru.ildar.futureminds.domain.dto.Role;
+import ru.ildar.futureminds.domain.dto.course.CourseMainDTO;
+import ru.ildar.futureminds.domain.dto.user.ProfileRequest;
+import ru.ildar.futureminds.domain.dto.user.UserProfileResponse;
 import ru.ildar.futureminds.exception.UserNotFound;
 import ru.ildar.futureminds.model.Course;
 import ru.ildar.futureminds.model.User;
@@ -91,7 +91,6 @@ public class UserController {
         userService.save(user);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
 
 
     private CourseMainDTO convertToDTO(Course course) {

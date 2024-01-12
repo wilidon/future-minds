@@ -1,15 +1,13 @@
 package ru.ildar.futureminds.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
-import ru.ildar.futureminds.dto.Role;
+import ru.ildar.futureminds.domain.dto.Role;
 
 import java.sql.Date;
-import java.util.List;
 import java.util.Set;
 
 

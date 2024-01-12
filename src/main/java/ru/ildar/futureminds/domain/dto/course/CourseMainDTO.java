@@ -1,4 +1,4 @@
-package ru.ildar.futureminds.dto.course;
+package ru.ildar.futureminds.domain.dto.course;
 
 import lombok.Data;
 

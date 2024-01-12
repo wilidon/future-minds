@@ -3,8 +3,8 @@ package ru.ildar.futureminds.service;
 import io.jsonwebtoken.Claims;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
-import ru.ildar.futureminds.dto.user.JwtAuthentication;
-import ru.ildar.futureminds.dto.Role;
+import ru.ildar.futureminds.domain.dto.user.JwtAuthentication;
+import ru.ildar.futureminds.domain.dto.Role;
 
 import java.util.List;
 import java.util.Set;

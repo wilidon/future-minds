@@ -1,4 +1,4 @@
-package ru.ildar.futureminds.dto.user;
+package ru.ildar.futureminds.domain.dto.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

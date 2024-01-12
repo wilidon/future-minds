@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import ru.ildar.futureminds.dto.news.NewsDTO;
+import ru.ildar.futureminds.domain.dto.news.NewsDTO;
 import ru.ildar.futureminds.model.News;
 import ru.ildar.futureminds.service.NewsService;
 

@@ -1,4 +1,4 @@
-package ru.ildar.futureminds.dto.news;
+package ru.ildar.futureminds.domain.dto.news;
 
 
 import lombok.Data;

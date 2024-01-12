@@ -1,10 +1,6 @@
 package ru.ildar.futureminds.controller;
 
 
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -12,9 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import ru.ildar.futureminds.dto.review.ReviewRequest;
+import ru.ildar.futureminds.domain.dto.review.ReviewRequest;
 import ru.ildar.futureminds.model.Review;
-import ru.ildar.futureminds.repository.ReviewRepository;
 import ru.ildar.futureminds.service.ReviewService;
 
 import java.util.List;

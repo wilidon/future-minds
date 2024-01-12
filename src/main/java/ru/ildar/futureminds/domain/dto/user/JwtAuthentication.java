@@ -1,10 +1,10 @@
-package ru.ildar.futureminds.dto.user;
+package ru.ildar.futureminds.domain.dto.user;
 
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-import ru.ildar.futureminds.dto.Role;
+import ru.ildar.futureminds.domain.dto.Role;
 
 import java.util.Collection;
 import java.util.Set;

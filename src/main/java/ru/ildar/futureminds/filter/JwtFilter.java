@@ -14,7 +14,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.GenericFilterBean;
-import ru.ildar.futureminds.dto.user.JwtAuthentication;
+import ru.ildar.futureminds.domain.dto.user.JwtAuthentication;
 import ru.ildar.futureminds.service.JwtProvider;
 import ru.ildar.futureminds.service.JwtUtils;
 

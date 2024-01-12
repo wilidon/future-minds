@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import ru.ildar.futureminds.dto.course.CourseMainDTO;
+import ru.ildar.futureminds.domain.dto.course.CourseMainDTO;
 import ru.ildar.futureminds.exception.ModuleNotFound;
 import ru.ildar.futureminds.model.Course;
 import ru.ildar.futureminds.model.User;

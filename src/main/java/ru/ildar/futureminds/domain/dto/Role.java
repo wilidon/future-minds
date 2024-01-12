@@ -1,4 +1,4 @@
-package ru.ildar.futureminds.dto;
+package ru.ildar.futureminds.domain.dto;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;

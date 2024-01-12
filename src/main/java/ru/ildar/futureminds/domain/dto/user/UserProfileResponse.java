@@ -1,10 +1,9 @@
-package ru.ildar.futureminds.dto.user;
+package ru.ildar.futureminds.domain.dto.user;
 
 import lombok.Getter;
 import lombok.Setter;
-import ru.ildar.futureminds.dto.Role;
-import ru.ildar.futureminds.dto.course.CourseMainDTO;
-import ru.ildar.futureminds.model.Course;
+import ru.ildar.futureminds.domain.dto.course.CourseMainDTO;
+import ru.ildar.futureminds.domain.dto.Role;
 
 import java.util.List;
 import java.util.Set;

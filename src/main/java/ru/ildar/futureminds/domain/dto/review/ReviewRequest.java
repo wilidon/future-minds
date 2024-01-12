@@ -1,4 +1,4 @@
-package ru.ildar.futureminds.dto.review;
+package ru.ildar.futureminds.domain.dto.review;
 
 import lombok.Getter;
 import lombok.Setter;
